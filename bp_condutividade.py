@@ -21,11 +21,11 @@ Joule = lambda x: x/1.602176634e-19 # Converte x para de eV para J
 
 
 # %% [ Variáveis e constantes ]-----------------------------------------------
-hbar = constantes.value(u"reduced Planck constant in eV s") # eVs: 6.582119569e-16
-m0   = constantes.value(u"electron mass")                   #  kg: 9.1093837015e-31
-kBT  = constantes.value(u"Boltzmann constant in eV/K")*300  #  eV: 0.025851999786
-e    = constantes.value(u"elementary charge")               #   C: 1.602176634e-19
-c    = constantes.value(u"speed of light in vacuum")        # m/s: 299792458.0
+hbar = constantes.value(u"reduced Planck constant")     #  Js: 
+m0   = constantes.value(u"electron mass")               #  kg: 9.1093837015e-31
+kBT  = constantes.value(u"Boltzmann constant")*300      #   J: 
+e    = constantes.value(u"elementary charge")           #   C: 1.602176634e-19
+c    = constantes.value(u"speed of light in vacuum")    # m/s: 299792458.0
 
 # %% [ Cálculo da condutividade ]---------------------------------------------
 Delta  = Joule(2.0)            # eV
