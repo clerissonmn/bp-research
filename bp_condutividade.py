@@ -19,7 +19,6 @@ from plotly.subplots import make_subplots
 eV    = lambda x: x/1.602176634e-19 # Converte x J para eV
 Joule = lambda x: x*1.602176634e-19 # Converte x eV para J
 
-print(eV(hbar))
 # %% [ Variáveis e constantes ]-----------------------------------------------
 hbar = constantes.value(u"reduced Planck constant")     #  Js: 
 m0   = constantes.value(u"electron mass")               #  kg: 9.1093837015e-31
@@ -72,3 +71,4 @@ fig_eps.add_trace(go.Scatter(x=lda, y=imag(sigAC), name='Imag{sigAC}'))
 fig_eps.update_yaxes(type="log")
 
 fig_eps.show()
+# %%
