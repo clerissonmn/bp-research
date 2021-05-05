@@ -131,3 +131,5 @@ dmypy.json
 
 # ------------ MY -------------------
 validar_condutividade/*
+
+.vscode/
