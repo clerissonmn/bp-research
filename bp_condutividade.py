@@ -16,10 +16,10 @@ import plotly.graph_objects as go
 from plotly.subplots import make_subplots
 
 # %% [ Funções ]--------------------------------------------------------------
-eV    = lambda x: x*1.602176634e-19 # Converte x de J para eletronvolt
-Joule = lambda x: x/1.602176634e-19 # Converte x para de eV para J
+eV    = lambda x: x*1.602176634e-19 # Converte x J para eV
+Joule = lambda x: x/1.602176634e-19 # Converte x eV para J
 
-
+print(eV(hbar))
 # %% [ Variáveis e constantes ]-----------------------------------------------
 hbar = constantes.value(u"reduced Planck constant")     #  Js: 
 m0   = constantes.value(u"electron mass")               #  kg: 9.1093837015e-31
@@ -28,35 +28,36 @@ e    = constantes.value(u"elementary charge")           #   C: 1.602176634e-19
 c    = constantes.value(u"speed of light in vacuum")    # m/s: 299792458.0
 
 # %% [ Cálculo da condutividade ]---------------------------------------------
-Delta  = Joule(2.0)            # eV
-a      = 0.223*1e-9     # m
-gamma1 = 4 * a/pi       # eVm
-eta    = 10*1e-3        # eV
+Delta  = Joule(2.0)       # J
+a      = 0.223*1e-9       # m
+gamma1 = Joule(4 * a/pi)  # Jm
+eta    = Joule(10*1e-3)   # J
 
-# ----------[ Massas ]----------#
+# ----------[ Massas ]---------- #
 eta_c  = hbar**2 / (0.4*m0)
 nu_c   = hbar**2 / (1.4*m0)
 
 mAC    = hbar**2 / (2*gamma1**2 / Delta + eta_c)
 mZZ    = hbar**2 / (2*nu_c)
 
-# ----------[ nc: Densidade de portadores ]----------#
+# ----------[ nc: Densidade de portadores ]---------- #
 m1D   = (mAC*mZZ)**(0.5)  # kg
-EF_EC = 0.6               # eV: EF - EC
+EF_EC = Joule(0.6)        # J: EF - EC
+
 nc   = (m1D*kBT / (pi*hbar**2)) * log(1+exp(EF_EC/kBT))
 
-# ----------[ DAC: Peso de Drude AC ]----------#
+# %% ----------[ DAC: Peso de Drude AC ]---------- #
 DAC = pi * e**2 * nc / mAC
 
-# ----------[ DZZ: Peso de Drude ZZ ]----------#
+# ----------[ DZZ: Peso de Drude ZZ ]---------- #
 DZZ = pi * e**2 * nc / mZZ
 
-# ----------[ freq e lda ]----------#
+# ----------[ freq e lda ]---------- #
 lda   = linspace(4.0,20.0,100)*1e-6   # m
 freq  = c/lda                         # Hz
 omega = 2*pi*freq
 
-# ----------[ sigmaAC: Condutividade AC ]----------#
+# ----------[ sigmaAC: Condutividade AC ]---------- #
 eta_hbar = eta/hbar
 sigAC = 1j*DAC / (pi*(omega + 1j*eta_hbar))
 
