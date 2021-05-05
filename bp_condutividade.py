@@ -16,8 +16,8 @@ import plotly.graph_objects as go
 from plotly.subplots import make_subplots
 
 # %% [ Funções ]--------------------------------------------------------------
-eV    = lambda x: x*1.602176634e-19 # Converte x J para eV
-Joule = lambda x: x/1.602176634e-19 # Converte x eV para J
+eV    = lambda x: x/1.602176634e-19 # Converte x J para eV
+Joule = lambda x: x*1.602176634e-19 # Converte x eV para J
 
 print(eV(hbar))
 # %% [ Variáveis e constantes ]-----------------------------------------------
