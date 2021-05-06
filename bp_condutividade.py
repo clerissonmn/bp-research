@@ -7,7 +7,7 @@
 # Journal of Physics D: Applied Physics 54.22 (2021): 225202.
 #
 #%% [ Imports ]--------------------------------------------------------------
-from numpy import pi, log, exp, linspace, real, imag 
+import numpy as np
 import matplotlib.pyplot as plt
 import scipy.constants as constantes # https://docs.scipy.org/doc/scipy/reference/constants.html
 
@@ -34,7 +34,7 @@ def bp_sigma(range_lda=None, range_freq=None, pot_quimico=None):
 
     Delta  = Joule(2.0)       # J
     a      = 0.223*1e-9       # m
-    gamma1 = Joule(4 * a/pi)  # Jm
+    gamma1 = Joule(4 * a/np.pi)  # Jm
     eta    = Joule(10*1e-3)   # J
 
     # ----------[ Testes de sanidade ]---------- #
@@ -65,34 +65,34 @@ def bp_sigma(range_lda=None, range_freq=None, pot_quimico=None):
     m1D   = (mAC*mZZ)**(0.5)  # kg
     EF_EC = Joule(mu_c)       # J: EF - EC (Potencial qímico)
 
-    nc   = (m1D*kBT / (pi*hbar**2)) * log(1+exp(EF_EC/kBT))
+    nc   = (m1D*kBT / (np.pi*hbar**2)) * np.log(1+np.exp(EF_EC/kBT))
 
     # ----------[ Condutividade ]---------- #
-    omega = 2*pi*freq
+    omega = 2*np.pi*freq
     eta_hbar = eta/hbar
     
-    DAC = pi * e**2 * nc / mAC
-    sigAC = 1j*DAC / (pi*(omega + 1j*eta_hbar))
+    DAC = np.pi * e**2 * nc / mAC
+    sigAC = 1j*DAC / (np.pi*(omega + 1j*eta_hbar))
 
-    DZZ = pi * e**2 * nc / mZZ
-    sigZZ = 1j*DZZ / (pi*(omega + 1j*eta_hbar))
+    DZZ = np.pi * e**2 * nc / mZZ
+    sigZZ = 1j*DZZ / (np.pi*(omega + 1j*eta_hbar))
 
     return {'xx':sigAC, 'yy':sigZZ}
 
 
 # [ Plot ]------------------------------------------------------------------
 
-llda   = linspace(4.0,20.0,100)*1e-6   # m
+llda   = np.linspace(4.0,20.0,100)*1e-6   # m
 mmu = 0.6
-sigma = bp_sigma(range_lda=llda, range_freq=ffreq, pot_quimico=0.6)
+sigma = bp_sigma(range_lda=llda, pot_quimico=0.6)
 
 x  = llda
 y1 = sigma['xx']
 y1 = sigma['yy']
 
 fig_eps = make_subplots()
-fig_eps.add_trace(go.Scatter(x=x, y=real(y1), name='Re{sig_ACC}' ))
-fig_eps.add_trace(go.Scatter(x=x, y=imag(y1), name='Imag{sig_AC}'))
+fig_eps.add_trace(go.Scatter(x=x, y=np.real(y1), name='Re{sig_ACC}' ))
+fig_eps.add_trace(go.Scatter(x=x, y=np.imag(y1), name='Imag{sig_AC}'))
 
 fig_eps.update_yaxes(type="log")
 
