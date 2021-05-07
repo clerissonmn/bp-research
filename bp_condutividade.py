@@ -24,6 +24,7 @@ def bp_sigma(range_lda=None, range_freq=None, pot_quimico=None):
     Liu, Chao, et al. Journal of Physics D: Applied Physics 54.22 (2021): 225202.
 
     Todos os parâmetros foram convertidos para assegurar estarem no SI. O range de 
+
     de frequências ou de  comprimentos de onda são obrigatórios mas mútuamente exclusivos, 
     ou seja, se forem passados os dois, a prioridade é comprimento de onda. O potencial 
     químico deve ser dado em eV (a conversão para o SI será feita automática quando Soportuno).
