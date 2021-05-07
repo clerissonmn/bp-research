@@ -30,9 +30,9 @@ def bp_sigma(range_lda=None, range_freq=None, pot_quimico=None):
     químico deve ser dado em eV (a conversão para o SI será feita automática quando Soportuno).
 
     Args:
-        range_lda (ndarray, obrigatório): [description]. Range de comprimento de ondas em m.Padrão é None.
-        range_freq (ndarray, obrigatório): [description]. Range de frequências em Hz. Padrão é None.
-        pot_quimico (float, optional): [description]. Potêncial químico em eV.Padrão é None.
+        range_lda (list, tuple ou escalar, obrigatório): Range de comprimento de ondas em m.Padrão é None.
+        range_freq (list, tuple ou escalar): Range de frequências em Hz. Padrão é None.
+        pot_quimico (float, optional): Potêncial químico em eV.Padrão é None.
 
     Returns:
         dict de complexos: dict no formato {'xx':[a+jb,...], 'yy':[a+jb,...]} com as 
@@ -56,11 +56,11 @@ def bp_sigma(range_lda=None, range_freq=None, pot_quimico=None):
 
     # ----------[ Testes de sanidade ]---------- #
     if range_lda is not None:
-        lda = range_lda
+        lda = np.asarray(range_lda)
         freq = c/lda
     else:
         if range_freq is not None:
-            freq = range_freq
+            freq = np.asarray(range_freq)
         else:
             raise Exception("Faltando parâmetros. range_freq ou range_lda devem estar definidos.")
         
@@ -95,8 +95,7 @@ def bp_sigma(range_lda=None, range_freq=None, pot_quimico=None):
     sigZZ = 1j*DZZ / (np.pi*(omega + 1j*eta_hbar))
 
     return {'xx':sigAC, 'yy':sigZZ}
-
-
+    
 # [ Plot ]------------------------------------------------------------------
 
 llda   = np.linspace(4.0,20.0,100)*1e-6   # m
