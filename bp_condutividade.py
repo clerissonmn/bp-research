@@ -20,7 +20,23 @@ from warnings import warn
 # [ Função para a condutividade ]---------------------------------------------
 
 def bp_sigma(range_lda=None, range_freq=None, pot_quimico=None):
+    """Calcula a condutividade para uma camada de fosforeno com base em 
+    Liu, Chao, et al. Journal of Physics D: Applied Physics 54.22 (2021): 225202.
 
+    Todos os parâmetros foram convertidos para assegurar estarem no SI. O range de 
+    de comprimentos de onda são obrigatórios mas mútuamente exclusivos, ou seja,
+    se forem passados os dois, a prioridade é comprimento de onda. O potencial químico
+    deve ser dado em eV (a conversão para o SI será feita automática quando oportuno).
+
+    Args:
+        range_lda (ndarray, obrigatório): [description]. Range de comprimento de ondas em m.Padrão é None.
+        range_freq (ndarray, obrigatório): [description]. Range de frequências em Hz. Padrão é None.
+        pot_quimico (float, optional): [description]. Potêncial químico em eV.Padrão é None.
+
+    Returns:
+        dict de complexos: dict no formato {'xx':[a+jb,...], 'yy':[a+jb,...]} com as 
+                            condutividades AC e ZZ respectivamente.
+    """
     # ----------[ Funções ]---------- #
     eV    = lambda x: x/1.602176634e-19 # Converte x J para eV
     Joule = lambda x: x*1.602176634e-19 # Converte x eV para J
@@ -97,3 +113,5 @@ fig_eps.add_trace(go.Scatter(x=x, y=np.imag(y1), name='Imag{sig_AC}'))
 fig_eps.update_yaxes(type="log")
 
 fig_eps.show()
+
+# %%
