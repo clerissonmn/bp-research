@@ -48,7 +48,7 @@ class BlackPhosphorus():
 
         return STRING
 
-    def sigma_liu_et_all(self, range_lda=None, range_freq=None, pot_quimico=None, exporta_parametros=False):
+    def sigma_liu2021(self, range_lda=None, range_freq=None, pot_quimico=None, exporta_parametros=False):
         """Calcula a condutividade para uma camada de fosforeno com base em 
         Liu, Chao, et al. Journal of Physics D: Applied Physics 54.22 (2021): 225202.
 
@@ -125,14 +125,14 @@ class BlackPhosphorus():
         DZZ = np.pi * e**2 * nc / mZZ
         sigZZ = 1j*DZZ / (np.pi*(omega + 1j*eta_hbar))
 
-        parametros = [{'nome':'hbar'      , 'valor':hbar, 'desc':'# Js'},
-                      {'nome':'m0'      , 'valor':m0, 'desc':'Kg'},
-                      {'nome':'e'       , 'valor':e, 'desc':'# C'},
-                      {'nome':'kBT'     , 'valor':kBT, 'desc':'# J'},
-                      {'nome':'c'       , 'valor':c, 'desc':'# m/s'},
-                      {'nome':'Delta'   , 'valor':Delta, 'desc':'# J'},
-                      {'nome':'a'       , 'valor':a, 'desc':'# m'},
-                      {'nome':'gamma1'  , 'valor':gamma1, 'desc':'# Jm'},
+        parametros = [{'nome':'hbar'    , 'valor':f"{hbar}[J*s/rad]", 'desc':'# Js'},
+                      {'nome':'m0'      , 'valor':m0[Kg], 'desc':'Kg'},
+                      {'nome':'e'       , 'valor':e[C], 'desc':'# C'},
+                      {'nome':'kBT'     , 'valor':kBT[J], 'desc':'# J'},
+                      {'nome':'c'       , 'valor':c[m/s], 'desc':'# m/s'},
+                      {'nome':'Delta'   , 'valor':Delta[J], 'desc':'# J'},
+                      {'nome':'a'       , 'valor':a[m], 'desc':'# m'},
+                      {'nome':'gamma1'  , 'valor':gamma1[J*m], 'desc':'# Jm'},
                       {'nome':'eta_c'   , 'valor':'hbar^2 / (0.4*m0)', 'desc': 'J'},
                       {'nome':'nu_c'    , 'valor':'hbar^2 / (1.4*m0)', 'desc':''},
                       {'nome':'mAC'     , 'valor':'hbar^2 / (2*gamma1^2 / Delta + eta_c)', 'desc':''},
